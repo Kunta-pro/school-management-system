@@ -1,6 +1,6 @@
 // Import Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -60,12 +60,13 @@ async function loginUser() {
 }
 
 // Function to handle logout
-function logout() {
-    auth.signOut().then(() => {
+async function logout() {
+    try {
+        await signOut(auth);
         alert("You have logged out.");
         document.getElementById('content-section').style.display = 'none';
         document.getElementById('login-section').style.display = 'block'; // Show login section
-    }).catch((error) => {
+    } catch (error) {
         alert(`Error: ${error.message}`);
-    });
+    }
 }
