@@ -1,19 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Untitled</title>
-  <link rel="stylesheet" href="./style.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education App</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<div id="app"></div>
+  <h1>Welcome to the Education App</h1>
 
-<!-- Include the necessary scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- partial -->
-  <script  src="./script.js"></script>
+  <!-- Login Form -->
+  <div id="login-section">
+    <h2>Login</h2>
+    <input type="email" id="login-email" placeholder="Email" required />
+    <input type="password" id="login-password" placeholder="Password" required />
+    <button onclick="loginUser()">Login</button>
+    <p>Don’t have an account? <a href="#" onclick="toggleForms()">Register here</a></p>
+  </div>
 
+  <!-- Registration Form -->
+  <div id="register-section" style="display: none;">
+    <h2>Register</h2>
+    <input type="email" id="register-email" placeholder="Email" required />
+    <input type="password" id="register-password" placeholder="Password" required />
+    <button onclick="registerUser()">Register</button>
+    <p>Already have an account? <a href="#" onclick="toggleForms()">Login here</a></p>
+  </div>
+
+  <!-- Content Section (visible after login) -->
+  <div id="content-section" style="display: none;">
+    <h2>Welcome, <span id="user-name"></span>!</h2>
+    <p>This is your dashboard with educational content.</p>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>
