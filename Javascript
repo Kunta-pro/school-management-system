@@ -1,0 +1,79 @@
+// Sample user data for demonstration purposes
+const users = [];
+
+// Function to toggle between login and registration forms
+function toggleForms() {
+    const loginSection = document.getElementById("login-section");
+    const registerSection = document.getElementById("register-section");
+    
+    if (loginSection.style.display === "none") {
+        loginSection.style.display = "block";
+        registerSection.style.display = "none";
+    } else {
+        loginSection.style.display = "none";
+        registerSection.style.display = "block";
+    }
+}
+
+// Function to handle user registration
+function registerUser() {
+    const email = document.getElementById("register-email").value;
+    const password = document.getElementById("register-password").value;
+
+    // Check if the user already exists
+    const existingUser = users.find(user => user.email === email);
+    if (existingUser) {
+        alert("User already exists. Please login.");
+        return;
+    }
+
+    // Create a new user and store in the users array
+    const newUser = { email, password };
+    users.push(newUser);
+
+    // Clear input fields
+    document.getElementById("register-email").value = '';
+    document.getElementById("register-password").value = '';
+
+    alert("Registration successful! Please login.");
+    toggleForms();
+}
+
+// Function to handle user login
+function loginUser() {
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+
+    // Check if the user exists and password matches
+    const user = users.find(user => user.email === email && user.password === password);
+    if (user) {
+        // Set the user name in the content section
+        document.getElementById("user-name").textContent = email.split('@')[0]; // Use the email prefix as the username
+        document.getElementById("login-section").style.display = "none";
+        document.getElementById("content-section").style.display = "block";
+    } else {
+        alert("Invalid email or password. Please try again.");
+    }
+}
+
+// Function to handle user logout
+function logout() {
+    document.getElementById("login-section").style.display = "block";
+    document.getElementById("content-section").style.display = "none";
+    document.getElementById("user-name").textContent = '';
+    document.getElementById("login-email").value = '';
+    document.getElementById("login-password").value = '';
+}
+
+// Optional: Add event listeners to handle 'Enter' key for login and registration
+document.getElementById("login-password").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        loginUser();
+    }
+});
+
+document.getElementById("register-password").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        registerUser();
+    }
+});
